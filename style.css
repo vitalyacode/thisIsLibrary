@@ -1,0 +1,116 @@
+* {
+    user-select: none;
+}
+
+body {
+    background-color: rgb(34, 0, 37);
+    color: white;
+}
+
+#books {
+    display: inline-block;
+}
+
+#add-book {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#add-book-sign {
+    background-image: url("plus");
+}
+
+#add-book-form {
+    width: 300px;
+    height: 400px;
+    position: absolute;
+    border: 1px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+    background-color: rgb(19, 0, 24);
+    z-index: 100;
+    display: none;
+    border-radius: 10px;
+}
+
+#close-form {
+    top: 5px;
+    right: 15px;
+    background-color:grey;
+    height: 30px;
+    width: 100%;
+    border-radius: 9px 9px 0px 0px;
+    user-select: none;
+}
+
+.delete-book {
+    /* position: absolute;
+    top: 5px;
+    right: 15px; */
+    background-color:grey;
+    height: 30px;
+    width: 100%;
+    border-radius: 9px 9px 0px 0px;
+    user-select: none;
+    text-align: center;
+    transition: .2s;
+}
+
+.delete-book:hover {
+    box-shadow: inset 0px -1px 15px 5px rgba(255,255,255,1);
+}
+
+.book {
+    width: 200px;
+    height: 260px;
+    min-width: 200px;
+    box-sizing: border-box;
+    border: 2px solid white;
+    float: left;
+    display: inline;
+    margin-right: 20px;
+    border-radius: 10px;
+    position: relative;
+    transition: .5s;
+    text-align: center;
+}
+
+.book:hover {
+    box-shadow: 0px -1px 15px 5px rgba(255,255,255,1);
+}
+
+.inputs {
+    display: block;
+    margin-top: 20px;
+}
+
+.title {
+    font-size: 18px;
+    line-height: 28px;
+}
+
+.read {
+    transition: .3;
+}
+
+.read:hover {
+    text-shadow: 0px 0px 5px rgba(255,255,255,1);
+}
+
+input, textarea {
+    border: none;
+    border-bottom: 2px solid rgb(218, 218, 218);
+    box-sizing: border-box;
+    text-align: center;
+    display: block;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+    border-bottom: 2px solid rgb(129, 129, 129);
+    transition: .3s;
+}

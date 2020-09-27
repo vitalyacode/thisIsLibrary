@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header><h1 style="text-align: center;">My Library</h2></header>
+        <div id="add-book-form">
+                <div id="close-form">x</div>
+                <div class="inputs">Title<input placeholder='Title' type="text" id="title-input"></div>
+                <div class="inputs">Author<input placeholder='Author' type="text" id="author-input"></div>
+                <div class="inputs">Number of pages<input placeholder='Number of pages' type="number" id="number-input" value=0></div>
+                <div class="inputs">Have you read this book?<input type="checkbox" id="read-input"></div>
+                <button id="add-book-button">Add book</button>
+        </div>
+        <div id="books">
+            <div id="add-book" class="book"><span id="add-book-sign"><img style='height: 100%; width: 100%; object-fit: contain' src="plus.png" alt=""></span></div>
+        </div>
+        
+        
+        <script src="script.js" async defer></script>
+    </body>
+</html>
