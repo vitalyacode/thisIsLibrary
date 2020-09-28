@@ -3,12 +3,13 @@
 }
 
 body {
-    background-color: rgb(34, 0, 37);
-    color: white;
+    background-color: rgb(63, 63, 63);
+    color: rgb(43, 43, 43)
 }
 
 #books {
     display: inline-block;
+    margin-left: 20px;
 }
 
 #add-book {
@@ -21,7 +22,7 @@ body {
     background-image: url("plus");
 }
 
-#add-book-form {
+.form-style {
     width: 300px;
     height: 400px;
     position: absolute;
@@ -31,13 +32,13 @@ body {
     left: 0;
     right: 0;
     text-align: center;
-    background-color: rgb(19, 0, 24);
+    background-color: rgb(214, 214, 214);
     z-index: 100;
     display: none;
     border-radius: 10px;
 }
 
-#close-form {
+.close-button {
     top: 5px;
     right: 15px;
     background-color:grey;
@@ -47,14 +48,20 @@ body {
     user-select: none;
 }
 
+#book-description {
+    width: 300px;
+    height: 400px;
+    background-color: rgb(214, 214, 214);
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .delete-book {
-    /* position: absolute;
-    top: 5px;
-    right: 15px; */
     background-color:grey;
     height: 30px;
     width: 100%;
-    border-radius: 9px 9px 0px 0px;
+    border-radius: 7px 7px 0px 0px;
     user-select: none;
     text-align: center;
     transition: .2s;
@@ -69,7 +76,7 @@ body {
     height: 260px;
     min-width: 200px;
     box-sizing: border-box;
-    border: 2px solid white;
+    border: 2px solid rgb(66, 66, 66);
     float: left;
     display: inline;
     margin-right: 20px;
@@ -77,11 +84,26 @@ body {
     position: relative;
     transition: .5s;
     text-align: center;
+    background-color: rgb(236, 235, 235);
+    box-shadow: inset 0px -1px 15px 5px rgba(0, 0, 0, 0.219);
 }
+
+.book p::after {
+    background-color: black;
+    content: '';
+    display: block;
+    height: 2px;
+    left: 10%;
+    position: absolute;
+    /* transform: translate(-50%, 0); */
+    width: 80%;
+}
+
 
 .book:hover {
     box-shadow: 0px -1px 15px 5px rgba(255,255,255,1);
     cursor: pointer;
+    transform: scaleY(1.1) scaleX(1.1);
 }
 
 .inputs {
@@ -100,7 +122,7 @@ body {
 }
 
 .read:hover {
-    text-shadow: 0px 0px 5px rgba(255,255,255,1);
+    text-shadow: 0px 0px 5px rgb(148, 148, 148);
 }
 
 input, textarea {

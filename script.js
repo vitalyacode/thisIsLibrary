@@ -13,7 +13,6 @@ function Book(title, author, pageNumber, read, data) {
     let acc = 0;
     if(title.length > titleMaxLength) {
         for(let i = 0; i < temp.length - 1; i++) {
-            console.log(acc + i + temp[i].length, acc + temp[i].length + temp[i + 1].length + i + 1)
             if(acc + i + temp[i].length <= titleMaxLength && acc + temp[i].length + temp[i + 1].length + i + 1 >= titleMaxLength) {
                 this.displayTitle = this.title.slice(0, acc + temp[i].length) + "..."
             }
@@ -22,7 +21,6 @@ function Book(title, author, pageNumber, read, data) {
     } else {
         this.displayTitle = this.title
     }
-    console.log(this.displayTitle)
 }
 
 function addBook(title, author, pageNumber, read, data) {
@@ -74,7 +72,7 @@ closeBookForm.addEventListener("click", () => {
     addBookForm.style.display = "none";
 })
 
-let submitNewBook = document.getElementById("add-book-button")
+let submitNewBook = document.getElementById("add-book-button");
 submitNewBook.addEventListener("click", () => {
     let titleInput = document.getElementById("title-input");
     let authorInput = document.getElementById("author-input");
@@ -91,8 +89,20 @@ submitNewBook.addEventListener("click", () => {
     }
 })
 
+let descriptionForm = document.getElementById("book-description");
+
+function getDescription(id) {
+    addBookForm.style.display = "none";
+    descriptionForm.style.display = "block";
+
+}
+
+document.getElementById("close-description").addEventListener("click", () => {
+    descriptionForm.style.display = "none";
+})
+
 document.addEventListener("click", e => {
-    if(e.target.className === "delete-book") {
+    if(e.target.classList.contains("delete-book")) {
         library.forEach((elem, index) => {
             if(e.target.dataset.index == elem.data) {
                 e.target.parentNode.remove()
@@ -100,13 +110,19 @@ document.addEventListener("click", e => {
             }
         })  
     }
-     else if(e.target.className === "read") {
+     else if(e.target.classList.contains("read")) {
         library.forEach((elem, index) => {
             if(e.target.parentNode.getAttribute("data") == elem.data) {
                 library[index].read = !library[index].read;
                 e.target.innerText = library[index].read ? "This book has been read" : "This book has not been read";
             }
         }) 
+    } else if(e.target.classList.contains("book")) {
+        getDescription(e.target.getAttribute("data"))
+    } else if(e.target.parentNode) {
+        if(e.target.parentNode.classList.contains("book")) {
+            getDescription(e.target.parentNode.getAttribute("data"))
+        }
     }
 })
 
