@@ -22,6 +22,13 @@ body {
     background-image: url("plus");
 }
 
+#add-book-button {
+    height: 30px;
+    font-size: 20px;
+    border: 2px solid gray;
+    border-radius: 8px;
+}
+
 .form-style {
     width: 300px;
     height: 400px;
@@ -41,11 +48,18 @@ body {
 .close-button {
     top: 5px;
     right: 15px;
-    background-color:grey;
+    background: rgb(128,128,128);
+    background: linear-gradient(180deg, rgba(128,128,128,1) 76%, rgba(173,173,173,1) 92%, rgba(235,235,235,1) 100%);
     height: 30px;
     width: 100%;
-    border-radius: 9px 9px 0px 0px;
+    border-radius: 7px 7px 17px 17px;
     user-select: none;
+    transition: .3s;
+}
+
+.close-button:hover {
+    box-shadow: inset 0px -1px 5px 3px rgba(255,255,255,1);
+    cursor: pointer;
 }
 
 #book-description {
@@ -57,18 +71,25 @@ body {
     margin-right: auto;
 }
 
+#read-input {
+    display: inline;
+    width: 30px;
+}
+
 .delete-book {
     background-color:grey;
     height: 30px;
     width: 100%;
-    border-radius: 7px 7px 0px 0px;
+    border-radius: 7px 7px 17px 17px;
     user-select: none;
     text-align: center;
     transition: .2s;
+    background: rgb(128,128,128);
+    background: linear-gradient(180deg, rgba(128,128,128,1) 76%, rgba(173,173,173,1) 92%, rgba(235,235,235,1) 100%);
 }
 
 .delete-book:hover {
-    box-shadow: inset 0px -1px 15px 5px rgba(255,255,255,1);
+    box-shadow: inset 0px -1px 5px 3px rgba(255,255,255,1);
 }
 
 .book {
@@ -85,7 +106,7 @@ body {
     transition: .5s;
     text-align: center;
     background-color: rgb(236, 235, 235);
-    box-shadow: inset 0px -1px 15px 5px rgba(0, 0, 0, 0.219);
+    box-shadow: inset 0px -1px 15px 5px rgba(0, 0, 0, 0.411);
 }
 
 .book p::after {
@@ -101,14 +122,26 @@ body {
 
 
 .book:hover {
-    box-shadow: 0px -1px 15px 5px rgba(255,255,255,1);
+    box-shadow: 0px -1px 15px 5px rgba(255,255,255,1), inset 0px -1px 15px 5px rgba(0, 0, 0, 0.678);
     cursor: pointer;
     transform: scaleY(1.1) scaleX(1.1);
 }
 
 .inputs {
     display: block;
-    margin-top: 20px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+
+.inputs input {
+    background: none;
+    font-size: 20px;
+    width: 90%;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .title {
@@ -127,14 +160,25 @@ body {
 
 input, textarea {
     border: none;
-    border-bottom: 2px solid rgb(218, 218, 218);
+    border-bottom: 2px solid rgb(179, 179, 179);
     box-sizing: border-box;
     text-align: center;
     display: block;
 }
 
-textarea:focus, input:focus{
+button {
+    border: none;
+    cursor: pointer;
+}
+
+textarea:focus, input:focus, button:focus{
     outline: none;
-    border-bottom: 2px solid rgb(129, 129, 129);
+    border-bottom: 2px solid rgb(68, 68, 68);
     transition: .3s;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
