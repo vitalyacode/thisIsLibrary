@@ -1,5 +1,6 @@
 let library = [];
 let dataCounter = 0;
+let titleMaxLength = 45;
 
 function Book(title, author, pageNumber, read, data) {
     this.title = title.replace(/\s+/g,' ').trim();
@@ -10,10 +11,10 @@ function Book(title, author, pageNumber, read, data) {
     this.displayTitle = "";
     let temp = this.title.split(" ");
     let acc = 0;
-    if(title.length > 55) {
+    if(title.length > titleMaxLength) {
         for(let i = 0; i < temp.length - 1; i++) {
             console.log(acc + i + temp[i].length, acc + temp[i].length + temp[i + 1].length + i + 1)
-            if(acc + i + temp[i].length <= 55 && acc + temp[i].length + temp[i + 1].length + i + 1 > 47) {
+            if(acc + i + temp[i].length <= titleMaxLength && acc + temp[i].length + temp[i + 1].length + i + 1 >= titleMaxLength) {
                 this.displayTitle = this.title.slice(0, acc + temp[i].length) + "..."
             }
             acc += temp[i].length + 1;
@@ -33,7 +34,7 @@ function addBook(title, author, pageNumber, read, data) {
 function addBookHTML(book) {
     let newBook = document.createElement("div");
     let title = document.createElement("p");
-    title.innerText = book.displayTitle;
+    title.innerText = `"${book.displayTitle}"`;
     title.setAttribute("class", "title");
     let author = document.createElement("p");
     author.innerText = "Author: " + book.author;
@@ -108,3 +109,5 @@ document.addEventListener("click", e => {
         }) 
     }
 })
+
+addBook("The lord of the rings and the story of homeless person", "J. Tolkien", 295, false, dataCounter)
