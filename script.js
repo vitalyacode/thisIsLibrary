@@ -78,8 +78,7 @@ submitNewBook.addEventListener("click", () => {
     let authorInput = document.getElementById("author-input");
     let numberInput = document.getElementById("number-input");
     let readInput = document.getElementById("read-input");
-
-    if(titleInput.value && authorInput.value && numberInput) {
+    if(titleInput.value && authorInput.value && numberInput.value > 0) {
         addBook(titleInput.value, authorInput.value, numberInput.value, readInput.checked, dataCounter);
         addBookForm.style.display = "none";
         titleInput.value = "";
