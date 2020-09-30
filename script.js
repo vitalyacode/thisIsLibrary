@@ -176,10 +176,10 @@ document.addEventListener("click", e => {
 document.getElementById("edit-book-btn").addEventListener("click", e => {
     if(descriptionTitle.value && descriptionAuthor.value && descriptionNumber.value > 0) {
         book.title = descriptionTitle.value;
-        book.displayTitle = `"${shortifyBySpace(descriptionTitle.value, titleMaxLength)}"`;
+        book.displayTitle = shortifyBySpace(descriptionTitle.value, titleMaxLength);
         book.author = descriptionAuthor.value;
         book.pageNumber = parseInt(descriptionNumber.value);
-        currentElement.querySelectorAll(".title")[0].innerText = book.displayTitle;
+        currentElement.querySelectorAll(".title")[0].innerText = `"${book.displayTitle}"`;
         currentElement.querySelectorAll(".author")[0].innerText = `Author: ${descriptionAuthor.value}`;
         currentElement.querySelectorAll(".page-number")[0].innerText = `Pages: ${descriptionNumber.value}`;
         e.target.parentNode.style.display = "none";
