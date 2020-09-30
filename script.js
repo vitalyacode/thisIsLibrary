@@ -2,29 +2,32 @@ let library = [];
 let dataCounter = 0;
 let titleMaxLength = 45;
 
+function shortifyBySpace(text, titleMaxLength) {
+    let temp = text.split(" ");
+    let acc = 0;
+    if(text.length > titleMaxLength) {
+        for(let i = 0; i < temp.length - 1; i++) {
+            if(acc + i + temp[i].length <= titleMaxLength && acc + temp[i].length + temp[i + 1].length + i + 1 >= titleMaxLength) {
+                return text.slice(0, acc + temp[i].length) + "..."
+            }
+            acc += temp[i].length + 1;
+        }
+    } else {
+        return text;
+    }
+}
+
 function Book(title, author, pageNumber, read, data) {
     this.title = title.replace(/\s+/g,' ').trim();
     this.author = author;
     this.pageNumber = pageNumber;
     this.read = read;
     this.data = data;
-    this.displayTitle = "";
-    let temp = this.title.split(" ");
-    let acc = 0;
-    if(title.length > titleMaxLength) {
-        for(let i = 0; i < temp.length - 1; i++) {
-            if(acc + i + temp[i].length <= titleMaxLength && acc + temp[i].length + temp[i + 1].length + i + 1 >= titleMaxLength) {
-                this.displayTitle = this.title.slice(0, acc + temp[i].length) + "..."
-            }
-            acc += temp[i].length + 1;
-        }
-    } else {
-        this.displayTitle = this.title
-    }
+    this.displayTitle = shortifyBySpace(this.title, titleMaxLength);
 }
 
 function addBook(title, author, pageNumber, read, data) {
-    library.push(new Book(title, author, pageNumber, read, data));
+    library.push(new Book(title, author, parseInt(pageNumber), read, data));
     addBookHTML(library[library.length - 1])
     dataCounter++;
 }
@@ -66,6 +69,7 @@ let addButton = document.getElementById("add-book");
 let addBookForm = document.getElementById("add-book-form")
 addButton.addEventListener("click", () => {
     addBookForm.style.display = "block";
+    descriptionForm.style.display = "none";
 })
 let closeBookForm = document.getElementById("close-form")
 closeBookForm.addEventListener("click", () => {
@@ -90,10 +94,28 @@ submitNewBook.addEventListener("click", () => {
 
 let descriptionForm = document.getElementById("book-description");
 
-function getDescription(id) {
+let descriptionTitle = document.getElementById("desc-title");
+let descriptionAuthor = document.getElementById("desc-author");
+let descriptionNumber = document.getElementById("desc-number");
+
+let currentElement;
+let id, book;
+
+function getDescription(element) {
     addBookForm.style.display = "none";
     descriptionForm.style.display = "block";
+    
+    //element.getAttribute("data")
+    id = element.getAttribute("data");
 
+    book = library.filter(obj => {
+        return obj.data == id;
+    })[0]
+    descriptionTitle.value = book.title;
+    descriptionAuthor.value = book.author;
+    descriptionNumber.value = parseInt(book.pageNumber);
+
+    currentElement = element;
 }
 
 document.getElementById("close-description").addEventListener("click", () => {
@@ -117,11 +139,24 @@ document.addEventListener("click", e => {
             }
         }) 
     } else if(e.target.classList.contains("book")) {
-        getDescription(e.target.getAttribute("data"))
-    } else if(e.target.parentNode) {
+        getDescription(e.target);
+    } else if(e.target.parentNode.classList) {
         if(e.target.parentNode.classList.contains("book")) {
-            getDescription(e.target.parentNode.getAttribute("data"))
+            getDescription(e.target.parentNode);
         }
+    }
+})
+
+document.getElementById("edit-book-btn").addEventListener("click", e => {
+    if(descriptionTitle.value && descriptionAuthor.value && descriptionNumber.value > 0) {
+        book.title = descriptionTitle.value;
+        book.displayTitle = `"${shortifyBySpace(descriptionTitle.value, titleMaxLength)}"`;
+        book.author = descriptionAuthor.value;
+        book.pageNumber = parseInt(descriptionNumber.value);
+        currentElement.querySelectorAll(".title")[0].innerText = book.displayTitle;
+        currentElement.querySelectorAll(".author")[0].innerText = `Author: ${descriptionAuthor.value}`;
+        currentElement.querySelectorAll(".page-number")[0].innerText = `Pages: ${descriptionNumber.value}`;
+        e.target.parentNode.style.display = "none";
     }
 })
 
