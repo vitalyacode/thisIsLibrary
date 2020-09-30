@@ -17,12 +17,35 @@ function shortifyBySpace(text, titleMaxLength) {
     }
 }
 
+function initializeLibrary() {
+    if(localStorage.books) {
+        if(localStorage.length) {
+            let tempLibrary;
+            tempLibrary = JSON.parse(localStorage.getItem("books"));
+            dataCounter = JSON.parse(localStorage.getItem("id"))
+            tempLibrary.forEach(e => {
+                library.push(new Book(e.title, e.author, parseInt(e.pageNumber), e.read, e.data));
+                addBookHTML(e);
+            })
+        }
+    }
+}
+
+initializeLibrary();
+
+function saveLibrary() {
+    localStorage.clear();
+    localStorage.setItem("books", JSON.stringify(library));
+    localStorage.setItem("id", dataCounter);
+    
+}
+
 function Book(title, author, pageNumber, read, data) {
     this.title = title.replace(/\s+/g,' ').trim();
     this.author = author;
     this.pageNumber = pageNumber;
     this.read = read;
-    this.data = data;
+    this.data = data; //book's id
     this.displayTitle = shortifyBySpace(this.title, titleMaxLength);
 }
 
@@ -49,7 +72,7 @@ function addBookHTML(book) {
     let deleteBook = document.createElement("div");
     deleteBook.innerText = "x";
     deleteBook.setAttribute("class", "delete-book");
-    deleteBook.setAttribute("data-index", dataCounter);
+    deleteBook.setAttribute("data-index", book.data);
     
     newBook.appendChild(deleteBook);
     newBook.appendChild(title);
@@ -57,7 +80,7 @@ function addBookHTML(book) {
     newBook.appendChild(pageNumber);
     newBook.appendChild(read);
     newBook.setAttribute("class", "book");
-    newBook.setAttribute("data", library.indexOf(book));
+    newBook.setAttribute("data", book.data);
      
     let parent = document.getElementById("books");
     let addBook = document.getElementById("add-book");
@@ -89,6 +112,7 @@ submitNewBook.addEventListener("click", () => {
         authorInput.value = "";
         numberInput.value = 0;
         readInput.checked = false;
+        saveLibrary();
     }
 })
 
@@ -128,6 +152,7 @@ document.addEventListener("click", e => {
             if(e.target.dataset.index == elem.data) {
                 e.target.parentNode.remove()
                 library.splice(index, 1);
+                saveLibrary();
             }
         })  
     }
@@ -136,6 +161,7 @@ document.addEventListener("click", e => {
             if(e.target.parentNode.getAttribute("data") == elem.data) {
                 library[index].read = !library[index].read;
                 e.target.innerText = library[index].read ? "This book has been read" : "This book has not been read";
+                saveLibrary()
             }
         }) 
     } else if(e.target.classList.contains("book")) {
@@ -157,7 +183,6 @@ document.getElementById("edit-book-btn").addEventListener("click", e => {
         currentElement.querySelectorAll(".author")[0].innerText = `Author: ${descriptionAuthor.value}`;
         currentElement.querySelectorAll(".page-number")[0].innerText = `Pages: ${descriptionNumber.value}`;
         e.target.parentNode.style.display = "none";
+        saveLibrary();
     }
 })
-
-addBook("The lord of the rings and the story of homeless person", "J. Tolkien", 295, false, dataCounter)
